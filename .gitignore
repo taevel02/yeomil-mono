@@ -1,0 +1,16 @@
+# Python Virtual Environment
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.pyrefly_cache/
+*.egg-info/
+/dist/
+
+# Upstream font resources (Downloaded via script, ignored in git)
+upstream/
+
+# OS files
+.DS_Store
+Thumbs.db
