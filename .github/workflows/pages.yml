@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'packages/yeomil-mono/docs/**'
+      - 'docs/**'
       - 'fonts/**'
   workflow_dispatch:
 
@@ -37,7 +37,7 @@ jobs:
           mkdir -p deploy_dist
           
           # 2. Copy showcase document assets to the root of the site
-          cp -r packages/yeomil-mono/docs/* deploy_dist/
+          cp -r docs/* deploy_dist/
           
           # 3. Copy font outputs to the deploy site assets folder
           mkdir -p deploy_dist/fonts
@@ -46,9 +46,9 @@ jobs:
           # 4. Resolve relative path configurations for CSS web font imports
           # Converts '@import "../../../fonts/webfont/..."' into '@import "fonts/webfont/..."'
           if [ "$(uname)" = "Darwin" ]; then
-            sed -i '' 's|\.\./\.\./\.\./fonts/|fonts/|g' deploy_dist/style.css
+            sed -i '' 's|\.\./fonts/|fonts/|g' deploy_dist/style.css
           else
-            sed -i 's|\.\./\.\./\.\./fonts/|fonts/|g' deploy_dist/style.css
+            sed -i 's|\.\./fonts/|fonts/|g' deploy_dist/style.css
           fi
 
       - name: Upload Artifact

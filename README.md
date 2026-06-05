@@ -34,16 +34,15 @@ make test
 
 ---
 
-## Monorepo Package Structure
+## Repository Structure
 ```
 yeomil-mono/
-├── packages/
-│   └── yeomil-mono/        # NPM Package root
-│       ├── fonts/          # Compiled font formats (TTF, OTF, WOFF2)
-│       └── font/           # Next.js custom localFont loaders
-├── src/                    # Python builder pipeline
-├── Casks/                  # Homebrew Formula
-└── Makefile                # Task runners
+├── fonts/              # Compiled font formats (TTF, OTF, WOFF2)
+├── docs/               # Technical light-theme web documentation
+├── src/                # Python builder pipeline
+├── Casks/              # Homebrew Formula
+├── package.json        # NPM package configuration
+└── Makefile            # Task runners
 ```
 
 ## License

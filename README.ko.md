@@ -22,16 +22,15 @@ make run
 
 이 과정은 `packages/yeomil-mono/fonts/` 경로 하위에 TTF, OTF 및 WOFF2 포맷 서체를 컴파일하여 생성합니다.
 
-## 모노레포 패키지 구조
+## 저장소 구조
 ```
 yeomil-mono/
-├── packages/
-│   └── yeomil-mono/        # NPM 패키지 루트
-│       ├── fonts/          # 컴파일 완료된 서체 파일 (TTF, OTF, WOFF2)
-│       └── font/           # Next.js 로컬폰트 매핑 로더
-├── src/                    # 파이썬 빌더 소스 코드
-├── Casks/                  # Homebrew 포뮬러
-└── Makefile                # 태스크 실행 스크립트
+├── fonts/              # 컴파일 완료된 서체 파일 (TTF, OTF, WOFF2)
+├── docs/               # 테크니컬 라이트 테마 웹 문서화 페이지
+├── src/                # 파이썬 빌더 소스 코드
+├── Casks/              # Homebrew 포뮬러
+├── package.json        # NPM 패키지 설정
+└── Makefile            # 태스크 실행 스크립트
 ```
 
 ## 라이선스
