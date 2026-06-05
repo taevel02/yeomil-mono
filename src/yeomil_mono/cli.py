@@ -32,7 +32,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument(
         "--output-dir",
-        default="packages/yeomil-mono/fonts",
+        default="fonts",
         help="Directory to save the merged fonts.",
     )
     parser.add_argument(
@@ -119,6 +119,17 @@ def main(argv: list[str] | None = None) -> int:
 
     # 4. Write web font CSS mapping file
     write_css(web_dir, args.family_name, args.weights)
+
+    # 5. Mirror to packages/yeomil-mono/fonts for distribution packaging
+    pkg_fonts_dir = Path("packages/yeomil-mono/fonts")
+    try:
+        import shutil
+        if pkg_fonts_dir.exists():
+            shutil.rmtree(pkg_fonts_dir)
+        shutil.copytree(base_output_dir, pkg_fonts_dir)
+        logger.info("Mirrored compiled fonts to package distribution at %s", pkg_fonts_dir)
+    except Exception as e:
+        logger.warning("Failed to mirror fonts to package folder: %s", e)
 
     logger.info("All requested weights built successfully!")
     return 0

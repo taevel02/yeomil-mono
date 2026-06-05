@@ -36,18 +36,18 @@ jobs:
           mkdir -p release-assets
           
           # Create TTF zip
-          cd packages/yeomil-mono/fonts/ttf
-          zip -r ../../../../release-assets/YeomilMono-TTF.zip .
+          cd fonts/ttf
+          zip -r ../../release-assets/YeomilMono-TTF.zip .
           cd -
           
           # Create OTF zip
-          cd packages/yeomil-mono/fonts/otf
-          zip -r ../../../../release-assets/YeomilMono-OTF.zip .
+          cd fonts/otf
+          zip -r ../../release-assets/YeomilMono-OTF.zip .
           cd -
           
           # Create Web fonts zip
-          cd packages/yeomil-mono/fonts/webfont
-          zip -r ../../../../release-assets/YeomilMono-Web.zip .
+          cd fonts/webfont
+          zip -r ../../release-assets/YeomilMono-Web.zip .
           cd -
 
       - name: Create GitHub Release

@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - 'packages/yeomil-mono/docs/**'
-      - 'packages/yeomil-mono/fonts/**'
+      - 'fonts/**'
   workflow_dispatch:
 
 permissions:
@@ -41,7 +41,7 @@ jobs:
           
           # 3. Copy font outputs to the deploy site assets folder
           mkdir -p deploy_dist/fonts
-          cp -r packages/yeomil-mono/fonts/* deploy_dist/fonts/
+          cp -r fonts/* deploy_dist/fonts/
           
           # 4. Resolve relative path configurations for CSS web font imports
           # Converts '@import "../fonts/webfont/..."' into '@import "fonts/webfont/..."'
