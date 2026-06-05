@@ -32,7 +32,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument(
         "--output-dir",
-        default="packages/yeomil-mono/dist",
+        default="packages/yeomil-mono/fonts",
         help="Directory to save the merged fonts.",
     )
     parser.add_argument(
@@ -59,12 +59,14 @@ def main(argv: list[str] | None = None) -> int:
     latin_dir = Path(args.latin_dir)
     cjk_dir = Path(args.cjk_dir)
 
-    # Establish subdirectories
+    # Establish subdirectories (Unified Font Repository v0.3)
     base_output_dir = Path(args.output_dir)
     ttf_dir = base_output_dir / "ttf"
-    web_dir = base_output_dir / "web"
+    otf_dir = base_output_dir / "otf"
+    web_dir = base_output_dir / "webfont"
 
     ttf_dir.mkdir(parents=True, exist_ok=True)
+    otf_dir.mkdir(parents=True, exist_ok=True)
     web_dir.mkdir(parents=True, exist_ok=True)
 
     for weight in args.weights:
@@ -76,9 +78,11 @@ def main(argv: list[str] | None = None) -> int:
         cjk_path = cjk_dir / cjk_filename
 
         output_filename_ttf = f"{args.family_name.replace(' ', '')}-{weight}.ttf"
+        output_filename_otf = f"{args.family_name.replace(' ', '')}-{weight}.otf"
         output_filename_woff2 = f"{args.family_name.replace(' ', '')}-{weight}.woff2"
 
         output_path_ttf = ttf_dir / output_filename_ttf
+        output_path_otf = otf_dir / output_filename_otf
         output_path_woff2 = web_dir / output_filename_woff2
 
         if not latin_path.exists():
@@ -98,7 +102,13 @@ def main(argv: list[str] | None = None) -> int:
                 subfamily_name=weight,
                 cjk_scale=args.scale,
             )
-            # 2. Compile WOFF2
+
+            # 2. Compile OTF (OpenType wrapper of merged TTF structure)
+            logger.info("Saving OpenType OTF: %s", output_path_otf)
+            font_obj = TTFont(str(output_path_ttf))
+            font_obj.save(str(output_path_otf))
+
+            # 3. Compile WOFF2
             logger.info("Converting to WOFF2: %s", output_path_woff2)
             font = TTFont(str(output_path_ttf))
             font.flavor = "woff2"
@@ -107,7 +117,7 @@ def main(argv: list[str] | None = None) -> int:
             logger.exception("Failed to build weight %s", weight)
             return 1
 
-    # 3. Write web font CSS mapping file
+    # 4. Write web font CSS mapping file
     write_css(web_dir, args.family_name, args.weights)
 
     logger.info("All requested weights built successfully!")

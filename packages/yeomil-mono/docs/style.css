@@ -1,5 +1,5 @@
 /* Import built Yeomil Mono webfont css dynamically */
-@import "../dist/web/yeomilmono.css";
+@import "../fonts/webfont/yeomilmono.css";
 
 /* Design System: Technical Monospace Light Blueprint */
 :root {

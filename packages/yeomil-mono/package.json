@@ -2,11 +2,12 @@
   "name": "yeomil-mono",
   "version": "1.0.0",
   "description": "Unified monospace font merging Geist Mono and Pretendard CJK for terminal/IDE environments.",
-  "main": "dist/web/yeomilmono.css",
-  "style": "dist/web/yeomilmono.css",
+  "main": "fonts/webfont/yeomilmono.css",
+  "style": "fonts/webfont/yeomilmono.css",
   "files": [
-    "dist/ttf",
-    "dist/web"
+    "fonts/ttf",
+    "fonts/otf",
+    "fonts/webfont"
   ],
   "keywords": [
     "font",

@@ -36,12 +36,17 @@ jobs:
           mkdir -p release-assets
           
           # Create TTF zip
-          cd packages/yeomil-mono/dist/ttf
+          cd packages/yeomil-mono/fonts/ttf
           zip -r ../../../../release-assets/YeomilMono-TTF.zip .
           cd -
           
+          # Create OTF zip
+          cd packages/yeomil-mono/fonts/otf
+          zip -r ../../../../release-assets/YeomilMono-OTF.zip .
+          cd -
+          
           # Create Web fonts zip
-          cd packages/yeomil-mono/dist/web
+          cd packages/yeomil-mono/fonts/webfont
           zip -r ../../../../release-assets/YeomilMono-Web.zip .
           cd -
 
@@ -50,6 +55,7 @@ jobs:
         with:
           files: |
             release-assets/YeomilMono-TTF.zip
+            release-assets/YeomilMono-OTF.zip
             release-assets/YeomilMono-Web.zip
           draft: false
           prerelease: false

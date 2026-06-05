@@ -13,14 +13,38 @@ brew install --cask font-yeomil-mono
 
 ## Building
 
-To build the font binaries locally:
+To build the font binaries locally, set up the environment and run the pipeline:
 
 ```bash
 make dev
 make run
 ```
+Downloads the original Geist Mono and Pretendard release files, applies the 1:2 scaling transformations, and compiles them to `packages/yeomil-mono/fonts/` in TTF, OTF, and WOFF2 formats.
 
-This compiles both TTF and WOFF2 formats under the `packages/yeomil-mono/dist/` directory.
+### Linting & Formatting
+```bash
+make lint
+make format
+```
+
+### Test Suite
+```bash
+make test
+```
+
+---
+
+## Monorepo Package Structure
+```
+yeomil-mono/
+├── packages/
+│   └── yeomil-mono/        # NPM Package root
+│       ├── fonts/          # Compiled font formats (TTF, OTF, WOFF2)
+│       └── font/           # Next.js custom localFont loaders
+├── src/                    # Python builder pipeline
+├── Casks/                  # Homebrew Formula
+└── Makefile                # Task runners
+```
 
 ## License
 
