@@ -44,11 +44,11 @@ jobs:
           cp -r fonts/* deploy_dist/fonts/
           
           # 4. Resolve relative path configurations for CSS web font imports
-          # Converts '@import "../fonts/webfont/..."' into '@import "fonts/webfont/..."'
+          # Converts '@import "../../../fonts/webfont/..."' into '@import "fonts/webfont/..."'
           if [ "$(uname)" = "Darwin" ]; then
-            sed -i '' 's|\.\./fonts/|fonts/|g' deploy_dist/style.css
+            sed -i '' 's|\.\./\.\./\.\./fonts/|fonts/|g' deploy_dist/style.css
           else
-            sed -i 's|\.\./fonts/|fonts/|g' deploy_dist/style.css
+            sed -i 's|\.\./\.\./\.\./fonts/|fonts/|g' deploy_dist/style.css
           fi
 
       - name: Upload Artifact
