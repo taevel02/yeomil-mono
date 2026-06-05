@@ -1,0 +1,61 @@
+name: Deploy Documentation to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'packages/yeomil-mono/docs/**'
+      - 'packages/yeomil-mono/fonts/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Build Standalone Docs Site
+        run: |
+          # 1. Create a dedicated deploy distribution directory
+          mkdir -p deploy_dist
+          
+          # 2. Copy showcase document assets to the root of the site
+          cp -r packages/yeomil-mono/docs/* deploy_dist/
+          
+          # 3. Copy font outputs to the deploy site assets folder
+          mkdir -p deploy_dist/fonts
+          cp -r packages/yeomil-mono/fonts/* deploy_dist/fonts/
+          
+          # 4. Resolve relative path configurations for CSS web font imports
+          # Converts '@import "../fonts/webfont/..."' into '@import "fonts/webfont/..."'
+          if [ "$(uname)" = "Darwin" ]; then
+            sed -i '' 's|\.\./fonts/|fonts/|g' deploy_dist/style.css
+          else
+            sed -i 's|\.\./fonts/|fonts/|g' deploy_dist/style.css
+          fi
+
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './deploy_dist'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
