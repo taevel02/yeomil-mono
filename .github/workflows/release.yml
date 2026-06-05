@@ -58,6 +58,6 @@ jobs:
             release-assets/YeomilMono-OTF.zip
             release-assets/YeomilMono-Web.zip
           draft: false
-          prerelease: false
+          prerelease: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
