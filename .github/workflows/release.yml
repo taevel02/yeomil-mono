@@ -28,6 +28,18 @@ jobs:
       - name: Install dependencies
         run: uv sync --all-groups
 
+      - name: Update Version in Configuration Files Dynamically
+        run: |
+          # Extract version from tag (e.g., refs/tags/v1.0.1 -> 1.0.1)
+          TAG_VERSION=${GITHUB_REF#refs/tags/v}
+          echo "Triggered by tag version: $TAG_VERSION"
+          
+          # Dynamically patch version in Cask formula
+          sed -i "s/version \".*\"/version \"$TAG_VERSION\"/g" Casks/font-yeomil-mono.rb
+          
+          # Dynamically patch version in pyproject.toml
+          sed -i "s/version = \".*\"/version = \"$TAG_VERSION\"/g" pyproject.toml
+
       - name: Compile fonts
         run: make run
 

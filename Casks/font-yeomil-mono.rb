@@ -7,6 +7,11 @@ cask "font-yeomil-mono" do
   desc "Unified monospace font merging Geist Mono and Pretendard CJK for developer environments"
   homepage "https://github.com/buddy-proiectio/yeomil-mono"
 
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
+
   font "YeomilMono-Regular.ttf"
   font "YeomilMono-Bold.ttf"
   font "YeomilMono-Light.ttf"
