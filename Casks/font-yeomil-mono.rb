@@ -4,7 +4,7 @@ cask "font-yeomil-mono" do
 
   url "https://github.com/buddy-proiectio/yeomil-mono/releases/download/v#{version}/YeomilMono-TTF.zip"
   name "Yeomil Mono"
-  desc "Unified monospace font merging Geist Mono and Pretendard CJK for developer environments"
+  desc "Monospace font combining Geist Mono and Pretendard CJK"
   homepage "https://github.com/buddy-proiectio/yeomil-mono"
 
   livecheck do
