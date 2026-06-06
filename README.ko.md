@@ -6,9 +6,10 @@
 
 ### macOS (Homebrew Cask)
 
-별도의 Tap 등록 없이 Cask Raw URL을 사용해 직접 설치할 수 있습니다:
+저장소를 Tap으로 추가한 후 Cask로 설치할 수 있습니다:
 ```bash
-brew install --cask https://raw.githubusercontent.com/buddy-proiectio/yeomil-mono/main/Casks/font-yeomil-mono.rb
+brew tap buddy-proiectio/yeomil-mono https://github.com/buddy-proiectio/yeomil-mono.git
+brew install --cask font-yeomil-mono
 ```
 
 ## 빌드 방법
@@ -20,7 +21,7 @@ make dev
 make run
 ```
 
-이 과정은 `packages/yeomil-mono/fonts/` 경로 하위에 TTF, OTF 및 WOFF2 포맷 서체를 컴파일하여 생성합니다.
+이 과정은 `fonts/` 경로 하위에 TTF, OTF 및 WOFF2 포맷 서체를 컴파일하여 생성합니다.
 
 ## 저장소 구조
 ```

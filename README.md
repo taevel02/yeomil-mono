@@ -6,9 +6,10 @@ Yeomil Mono is a unified CJK-Latin monospace font optimized for developer termin
 
 ### macOS (Homebrew Cask)
 
-You can install the font directly using the raw Cask URL:
+You can install the font by tapping the repository and installing the cask:
 ```bash
-brew install --cask https://raw.githubusercontent.com/buddy-proiectio/yeomil-mono/main/Casks/font-yeomil-mono.rb
+brew tap buddy-proiectio/yeomil-mono https://github.com/buddy-proiectio/yeomil-mono.git
+brew install --cask font-yeomil-mono
 ```
 
 ## Building
@@ -19,7 +20,7 @@ To build the font binaries locally, set up the environment and run the pipeline:
 make dev
 make run
 ```
-Downloads the original Geist Mono and Pretendard release files, applies the 1:2 scaling transformations, and compiles them to `packages/yeomil-mono/fonts/` in TTF, OTF, and WOFF2 formats.
+Downloads the original Geist Mono and Pretendard release files, applies the 1:2 scaling transformations, and compiles them to `fonts/` in TTF, OTF, and WOFF2 formats.
 
 ### Linting & Formatting
 ```bash
