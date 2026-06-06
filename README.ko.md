@@ -8,7 +8,7 @@
 
 별도의 Tap 등록 없이 Cask Raw URL을 사용해 직접 설치할 수 있습니다:
 ```bash
-brew install --cask https://raw.githubusercontent.com/taevel02/yeomil-mono/main/Casks/font-yeomil-mono.rb
+brew install --cask https://raw.githubusercontent.com/buddy-proiectio/yeomil-mono/main/Casks/font-yeomil-mono.rb
 ```
 
 ## 빌드 방법
