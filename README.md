@@ -8,7 +8,7 @@ Yeomil Mono is a unified CJK-Latin monospace font optimized for developer termin
 
 You can install the font directly using the raw Cask URL:
 ```bash
-brew install --cask https://raw.githubusercontent.com/taevel02/yeomil-mono/main/Casks/font-yeomil-mono.rb
+brew install --cask https://raw.githubusercontent.com/buddy-proiectio/yeomil-mono/main/Casks/font-yeomil-mono.rb
 ```
 
 ## Building
