@@ -1,5 +1,5 @@
 cask "font-yeomil-mono" do
-  version "1.0.0"
+  version "1.0.1"
   sha256 :no_check
 
   url "https://github.com/buddy-proiectio/yeomil-mono/releases/download/v#{version}/YeomilMono-TTF.zip"
