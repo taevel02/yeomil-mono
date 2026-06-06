@@ -6,9 +6,9 @@
 
 ### macOS (Homebrew Cask)
 
+별도의 Tap 등록 없이 Cask Raw URL을 사용해 직접 설치할 수 있습니다:
 ```bash
-brew tap taevel02/yeomil-mono
-brew install --cask font-yeomil-mono
+brew install --cask https://raw.githubusercontent.com/taevel02/yeomil-mono/main/Casks/font-yeomil-mono.rb
 ```
 
 ## 빌드 방법
@@ -29,7 +29,6 @@ yeomil-mono/
 ├── docs/               # 테크니컬 라이트 테마 웹 문서화 페이지
 ├── src/                # 파이썬 빌더 소스 코드
 ├── Casks/              # Homebrew 포뮬러
-├── package.json        # NPM 패키지 설정
 └── Makefile            # 태스크 실행 스크립트
 ```
 

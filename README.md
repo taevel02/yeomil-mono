@@ -6,9 +6,9 @@ Yeomil Mono is a unified CJK-Latin monospace font optimized for developer termin
 
 ### macOS (Homebrew Cask)
 
+You can install the font directly using the raw Cask URL:
 ```bash
-brew tap taevel02/yeomil-mono
-brew install --cask font-yeomil-mono
+brew install --cask https://raw.githubusercontent.com/taevel02/yeomil-mono/main/Casks/font-yeomil-mono.rb
 ```
 
 ## Building
@@ -41,7 +41,6 @@ yeomil-mono/
 ├── docs/               # Technical light-theme web documentation
 ├── src/                # Python builder pipeline
 ├── Casks/              # Homebrew Formula
-├── package.json        # NPM package configuration
 └── Makefile            # Task runners
 ```
 

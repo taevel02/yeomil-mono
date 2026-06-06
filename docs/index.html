@@ -206,10 +206,10 @@ function checkWidthRatio() {
             <h3>macOS (Homebrew)</h3>
           </div>
           <div class="col col-8 install-body">
-            <p>Install system-wide via custom tap cask recipe:</p>
+            <p>Install system-wide using the raw Cask URL directly:</p>
             <div class="terminal-cmd-box">
-              <span class="cmd-text">brew tap taevel02/yeomil-mono && brew install --cask font-yeomil-mono</span>
-              <button class="copy-btn" data-copy="brew tap taevel02/yeomil-mono && brew install --cask font-yeomil-mono">COPY</button>
+              <span class="cmd-text">brew install --cask https://raw.githubusercontent.com/taevel02/yeomil-mono/main/Casks/font-yeomil-mono.rb</span>
+              <button class="copy-btn" data-copy="brew install --cask https://raw.githubusercontent.com/taevel02/yeomil-mono/main/Casks/font-yeomil-mono.rb">COPY</button>
             </div>
           </div>
         </div>
@@ -217,13 +217,13 @@ function checkWidthRatio() {
         <div class="row install-row">
           <div class="col col-4 install-meta">
             <span class="spec-num">[02]</span>
-            <h3>NPM Package</h3>
+            <h3>Direct Download</h3>
           </div>
           <div class="col col-8 install-body">
-            <p>Add the package dependency to your web project:</p>
+            <p>Download pre-compiled zip packages (TTF, OTF, Webfont) from GitHub Releases:</p>
             <div class="terminal-cmd-box">
-              <span class="cmd-text">npm install yeomil-mono</span>
-              <button class="copy-btn" data-copy="npm install yeomil-mono">COPY</button>
+              <span class="cmd-text">https://github.com/taevel02/yeomil-mono/releases</span>
+              <a href="https://github.com/taevel02/yeomil-mono/releases" target="_blank" class="copy-btn" style="text-decoration:none;text-align:center;line-height:2.4;display:inline-block;">OPEN</a>
             </div>
           </div>
         </div>
@@ -231,14 +231,10 @@ function checkWidthRatio() {
         <div class="row install-row">
           <div class="col col-4 install-meta">
             <span class="spec-num">[03]</span>
-            <h3>CSS Stylesheet</h3>
+            <h3>Manual Install</h3>
           </div>
           <div class="col col-8 install-body">
-            <p>Import built @font-face rules at the top of your global CSS:</p>
-            <div class="terminal-cmd-box">
-              <span class="cmd-text">@import "yeomil-mono";</span>
-              <button class="copy-btn" data-copy='@import "yeomil-mono";'>COPY</button>
-            </div>
+            <p>Extract the downloaded ZIP archive, open the ttf/ or otf/ folder, and double-click the font files to install them system-wide.</p>
           </div>
         </div>
       </div>
