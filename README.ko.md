@@ -9,14 +9,14 @@
 터미널에서 아래의 `curl` 명령어를 실행하여 서체를 자동으로 설치할 수 있습니다 (macOS / Linux 지원):
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/buddy-proiectio/yeomil-mono/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/taevel02/yeomil-mono/main/install.sh | bash
 ```
 
 ### 2. 직접 다운로드
 
 수동으로 설치하려면 GitHub Releases에서 컴파일된 서체 파일(TTF/OTF)을 직접 다운로드하여 설치하실 수 있습니다:
 
-1. [GitHub Releases](https://github.com/buddy-proiectio/yeomil-mono/releases) 페이지로 이동합니다.
+1. [GitHub Releases](https://github.com/taevel02/yeomil-mono/releases) 페이지로 이동합니다.
 2. 최신 버전의 서체 압축 파일(`YeomilMono-TTF.zip` 또는 `YeomilMono-OTF.zip`)을 다운로드합니다.
 3. 압축을 푼 뒤 서체 파일을 실행하여 시스템에 설치합니다.
 

@@ -20,7 +20,7 @@ mkdir -p "$FONT_DIR"
 
 # Download fonts
 FONTS=("Regular" "Bold" "Light")
-BASE_URL="https://raw.githubusercontent.com/buddy-proiectio/yeomil-mono/main/fonts/ttf"
+BASE_URL="https://raw.githubusercontent.com/taevel02/yeomil-mono/main/fonts/ttf"
 
 for weight in "${FONTS[@]}"; do
     FILE_NAME="YeomilMono-${weight}.ttf"

@@ -9,14 +9,14 @@ Yeomil Mono is a unified CJK-Latin monospace font optimized for developer termin
 You can automatically install the font on macOS and Linux by running the following `curl` command in your terminal:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/buddy-proiectio/yeomil-mono/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/taevel02/yeomil-mono/main/install.sh | bash
 ```
 
 ### 2. Direct Download
 
 For manual installation, you can download the pre-compiled font binaries (TTF/OTF) directly from GitHub Releases:
 
-1. Go to the [GitHub Releases](https://github.com/buddy-proiectio/yeomil-mono/releases) page.
+1. Go to the [GitHub Releases](https://github.com/taevel02/yeomil-mono/releases) page.
 2. Download the latest version of the font archive (`YeomilMono-TTF.zip` or `YeomilMono-OTF.zip`).
 3. Extract the archive and double-click the font files to install them on your system.
 
