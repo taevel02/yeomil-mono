@@ -34,9 +34,6 @@ jobs:
           TAG_VERSION=${GITHUB_REF#refs/tags/v}
           echo "Triggered by tag version: $TAG_VERSION"
           
-          # Dynamically patch version in Cask formula
-          sed -i "s/version \".*\"/version \"$TAG_VERSION\"/g" Casks/font-yeomil-mono.rb
-          
           # Dynamically patch version in pyproject.toml
           sed -i "s/version = \".*\"/version = \"$TAG_VERSION\"/g" pyproject.toml
 
