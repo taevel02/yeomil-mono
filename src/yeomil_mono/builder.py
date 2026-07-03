@@ -7,6 +7,7 @@ import logging
 from pathlib import Path
 from typing import Any, cast
 
+from fontTools.feaLib.builder import addOpenTypeFeaturesFromString
 from fontTools.pens.boundsPen import BoundsPen
 from fontTools.pens.recordingPen import DecomposingRecordingPen
 from fontTools.pens.transformPen import TransformPen
@@ -69,7 +70,7 @@ def update_font_names(font: TTFont, family_name: str, subfamily_name: str) -> No
             logger.warning("Failed to update name record %d: %s", name_id, e)
 
 
-def merge_fonts(  # noqa: PLR0913, PLR0915
+def merge_fonts(  # noqa: PLR0912, PLR0913, PLR0915, C901
     latin_path: str,
     cjk_path: str,
     output_path: str,
@@ -116,16 +117,88 @@ def merge_fonts(  # noqa: PLR0913, PLR0915
     # We expect Latin width to be exactly 600, CJK target width to be exactly 1200
     target_cjk_width = 1200
 
+    # Map Hangul Jamo to Hangul Compatibility Jamo
+    choseong_map = {
+        0x1100: 0x3131,
+        0x1101: 0x3132,
+        0x1102: 0x3134,
+        0x1103: 0x3137,
+        0x1104: 0x3138,
+        0x1105: 0x3139,
+        0x1106: 0x3141,
+        0x1107: 0x3142,
+        0x1108: 0x3143,
+        0x1109: 0x3145,
+        0x110A: 0x3146,
+        0x110B: 0x3147,
+        0x110C: 0x3148,
+        0x110D: 0x3149,
+        0x110E: 0x314A,
+        0x110F: 0x314B,
+        0x1110: 0x314C,
+        0x1111: 0x314D,
+        0x1112: 0x314E,
+    }
+    jungseong_map = {code: 0x314F + (code - 0x1161) for code in range(0x1161, 0x1175 + 1)}
+    jongseong_map = {
+        0x11A8: 0x3131,
+        0x11A9: 0x3132,
+        0x11AA: 0x3133,
+        0x11AB: 0x3134,
+        0x11AC: 0x3135,
+        0x11AD: 0x3136,
+        0x11AE: 0x3137,
+        0x11AF: 0x3139,
+        0x11B0: 0x313A,
+        0x11B1: 0x313B,
+        0x11B2: 0x313C,
+        0x11B3: 0x313D,
+        0x11B4: 0x313E,
+        0x11B5: 0x313F,
+        0x11B6: 0x3140,
+        0x11B7: 0x3141,
+        0x11B8: 0x3142,
+        0x11B9: 0x3144,
+        0x11BA: 0x3145,
+        0x11BB: 0x3146,
+        0x11BC: 0x3147,
+        0x11BD: 0x3148,
+        0x11BE: 0x314A,
+        0x11BF: 0x314B,
+        0x11C0: 0x314C,
+        0x11C1: 0x314D,
+        0x11C2: 0x314E,
+    }
+    all_jamo_map = {}
+    all_jamo_map.update(choseong_map)
+    all_jamo_map.update(jungseong_map)
+    all_jamo_map.update(jongseong_map)
+
     # Collect codepoints to merge
     cjk_codepoints = [code for code in cjk_cmap if is_cjk(code)]
-    logger.info("Found %d CJK codepoints in source CJK font.", len(cjk_codepoints))
+    # Ensure all Jamo codepoints are included in cjk_codepoints for processing
+    for jamo_code in all_jamo_map:
+        if jamo_code not in cjk_codepoints:
+            cjk_codepoints.append(jamo_code)
+
+    logger.info("Found %d CJK codepoints (including Jamos) to merge.", len(cjk_codepoints))
 
     # Add new glyphs
     glyph_order = latin_font.getGlyphOrder()
 
     copied_count = 0
     for code in cjk_codepoints:
-        cjk_glyph_name = cjk_cmap[code]
+        # Determine source glyph name in CJK font
+        if code in all_jamo_map:
+            comp_code = all_jamo_map[code]
+            if comp_code in cjk_cmap:
+                cjk_glyph_name = cjk_cmap[comp_code]
+            else:
+                logger.warning("Compatibility Jamo 0x%04X not found in CJK cmap", comp_code)
+                continue
+        else:
+            cjk_glyph_name = cjk_cmap[code]
+
         if cjk_glyph_name not in cjk_glyph_set:
             continue
 
@@ -196,6 +269,46 @@ def merge_fonts(  # noqa: PLR0913, PLR0915
     post_table.isFixedPitch = 1
     os2_table = cast("Any", latin_font["OS/2"])
     os2_table.panose.bProportion = 9
+
+    # Compile and add GSUB ccmp features for NFD support
+    logger.info("Generating and compiling GSUB ccmp features for NFD support...")
+    fea_lines = [
+        "languagesystem DFLT dflt;",
+        "languagesystem latn dflt;",
+        "languagesystem hang dflt;",
+        "",
+        "feature ccmp {",
+    ]
+
+    choseong_list = sorted(choseong_map.keys())
+    jungseong_list = sorted(jungseong_map.keys())
+    jongseong_list = sorted(jongseong_map.keys())
+
+    # 3-Jamo substitutions
+    for c_idx, c_code in enumerate(choseong_list):
+        for v_idx, v_code in enumerate(jungseong_list):
+            for t_idx, t_code in enumerate(jongseong_list):
+                syllable_code = 0xAC00 + (c_idx * 21 * 28) + (v_idx * 28) + (t_idx + 1)
+                fea_lines.append(
+                    f"    sub uni{c_code:04X} uni{v_code:04X} "
+                    f"uni{t_code:04X} by uni{syllable_code:04X};"
+                )
+
+    # 2-Jamo substitutions
+    for c_idx, c_code in enumerate(choseong_list):
+        for v_idx, v_code in enumerate(jungseong_list):
+            syllable_code = 0xAC00 + (c_idx * 21 * 28) + (v_idx * 28)
+            fea_lines.append(f"    sub uni{c_code:04X} uni{v_code:04X} by uni{syllable_code:04X};")
+
+    fea_lines.append("} ccmp;")
+    fea_content = "\n".join(fea_lines)
+
+    try:
+        addOpenTypeFeaturesFromString(latin_font, fea_content)
+        logger.info("GSUB ccmp features successfully added.")
+    except Exception:
+        logger.exception("Failed to add GSUB ccmp features")
+        raise
 
     # Update names
     update_font_names(latin_font, family_name, subfamily_name)
