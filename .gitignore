@@ -11,6 +11,9 @@ __pycache__/
 # Upstream font resources (Downloaded via script, ignored in git)
 upstream/
 
+# Generated Nerd Font binaries
+fonts/nerd-font/
+
 # OS files
 .DS_Store
 Thumbs.db

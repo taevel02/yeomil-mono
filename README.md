@@ -20,6 +20,20 @@ For manual installation, you can download the pre-compiled font binaries (TTF/OT
 2. Download the latest version of the font archive (`YeomilMono-TTF.zip` or `YeomilMono-OTF.zip`).
 3. Extract the archive and double-click the font files to install them on your system.
 
+### 3. Nerd Font
+
+Release builds also include `YeomilMono-NerdFontMono-TTF.zip`, patched with the complete
+[Nerd Fonts](https://www.nerdfonts.com/) symbol set. Select
+`YeomilMono Nerd Font Mono` in your terminal after installation.
+
+To build the Nerd Font variant locally, install FontForge and run:
+
+```bash
+make nerd
+```
+
+The patched fonts are written to `fonts/nerd-font` and coexist with the original family.
+
 ## License
 
 [SIL Open Font License 1.1](LICENSE)

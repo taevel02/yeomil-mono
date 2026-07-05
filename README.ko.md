@@ -20,6 +20,20 @@ curl -fsSL https://raw.githubusercontent.com/taevel02/yeomil-mono/main/install.s
 2. 최신 버전의 서체 압축 파일(`YeomilMono-TTF.zip` 또는 `YeomilMono-OTF.zip`)을 다운로드합니다.
 3. 압축을 푼 뒤 서체 파일을 실행하여 시스템에 설치합니다.
 
+### 3. Nerd Font
+
+릴리스에는 전체 [Nerd Fonts](https://www.nerdfonts.com/) 심볼을 적용한
+`YeomilMono-NerdFontMono-TTF.zip`도 포함됩니다. 설치 후 터미널에서
+`YeomilMono Nerd Font Mono` 패밀리를 선택하세요.
+
+FontForge가 설치된 환경에서는 아래 명령으로 Nerd Font 버전을 직접 빌드할 수 있습니다.
+
+```bash
+make nerd
+```
+
+결과는 `fonts/nerd-font`에 생성되며 기존 Yeomil Mono와 함께 설치할 수 있습니다.
+
 ## 라이선스
 
 [SIL Open Font License 1.1](LICENSE)
