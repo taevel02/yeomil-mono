@@ -1,4 +1,4 @@
-.PHONY: dev lint format test build run download
+.PHONY: dev lint format test build run download nerd
 
 dev:
 	uv sync --all-groups
@@ -25,3 +25,5 @@ run:
 	fi
 	uv run yeomil-mono
 
+nerd:
+	./scripts/build-nerd-fonts.sh

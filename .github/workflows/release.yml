@@ -28,6 +28,9 @@ jobs:
       - name: Install dependencies
         run: uv sync --all-groups
 
+      - name: Install FontForge
+        run: sudo apt-get update && sudo apt-get install --yes fontforge
+
       - name: Update Version in Configuration Files Dynamically
         run: |
           # Extract version from tag (e.g., refs/tags/v1.0.1 -> 1.0.1)
@@ -39,6 +42,9 @@ jobs:
 
       - name: Compile fonts
         run: make run
+
+      - name: Compile Nerd Font variant
+        run: make nerd
 
       - name: Create release archives
         run: |
@@ -59,6 +65,11 @@ jobs:
           zip -r ../../release-assets/YeomilMono-Web.zip .
           cd -
 
+          # Create Nerd Font TTF zip
+          cd fonts/nerd-font
+          zip -r ../../release-assets/YeomilMono-NerdFontMono-TTF.zip .
+          cd -
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
@@ -66,6 +77,7 @@ jobs:
             release-assets/YeomilMono-TTF.zip
             release-assets/YeomilMono-OTF.zip
             release-assets/YeomilMono-Web.zip
+            release-assets/YeomilMono-NerdFontMono-TTF.zip
           draft: false
           prerelease: true
         env:
