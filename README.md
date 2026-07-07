@@ -22,9 +22,9 @@ For manual installation, you can download the pre-compiled font binaries (TTF/OT
 
 ### 3. Nerd Font
 
-Release builds also include `YeomilMono-NerdFontMono-TTF.zip`, patched with the complete
+Release builds also include `YeomilMono-NerdFont-TTF.zip`, patched with the complete
 [Nerd Fonts](https://www.nerdfonts.com/) symbol set. Select
-`YeomilMono Nerd Font Mono` in your terminal after installation.
+`YeomilMono Nerd Font` in your terminal after installation.
 
 To build the Nerd Font variant locally, install FontForge and run:
 
