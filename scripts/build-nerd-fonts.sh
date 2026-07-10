@@ -33,7 +33,6 @@ for weight in Regular Light Bold; do
   echo "Patching $source_font..."
   "$FONTFORGE_BIN" -script "$tmp_dir/patcher/font-patcher" \
     --complete \
-    --mono \
     --careful \
     --quiet \
     --no-progressbars \

@@ -67,7 +67,7 @@ jobs:
 
           # Create Nerd Font TTF zip
           cd fonts/nerd-font
-          zip -r ../../release-assets/YeomilMono-NerdFontMono-TTF.zip .
+          zip -r ../../release-assets/YeomilMono-NerdFont-TTF.zip .
           cd -
 
       - name: Create GitHub Release
@@ -77,7 +77,7 @@ jobs:
             release-assets/YeomilMono-TTF.zip
             release-assets/YeomilMono-OTF.zip
             release-assets/YeomilMono-Web.zip
-            release-assets/YeomilMono-NerdFontMono-TTF.zip
+            release-assets/YeomilMono-NerdFont-TTF.zip
           draft: false
           prerelease: true
         env:

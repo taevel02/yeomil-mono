@@ -23,8 +23,8 @@ curl -fsSL https://raw.githubusercontent.com/taevel02/yeomil-mono/main/install.s
 ### 3. Nerd Font
 
 릴리스에는 전체 [Nerd Fonts](https://www.nerdfonts.com/) 심볼을 적용한
-`YeomilMono-NerdFontMono-TTF.zip`도 포함됩니다. 설치 후 터미널에서
-`YeomilMono Nerd Font Mono` 패밀리를 선택하세요.
+`YeomilMono-NerdFont-TTF.zip`도 포함됩니다. 설치 후 터미널에서
+`YeomilMono Nerd Font` 패밀리를 선택하세요.
 
 FontForge가 설치된 환경에서는 아래 명령으로 Nerd Font 버전을 직접 빌드할 수 있습니다.
 
